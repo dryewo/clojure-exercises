@@ -11,6 +11,7 @@
   :profiles {:uberjar {:aot :all}
              :dev     {:source-paths ["dev"]
                        :repl-options {:init-ns user}
+                       :plugins      [[lein-midje "3.2"]]
                        :dependencies [[org.clojure/tools.namespace "0.2.11"]
                                       [org.clojure/java.classpath "0.2.2"]
                                       [criterium "0.4.3"]

@@ -1,36 +1,28 @@
 # clojure-exercises
 
-FIXME: description
+Exercises in Clojure.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Clone the repo.
 
 ## Usage
 
-FIXME: explanation
+1. Select a problem in `src/clojure-exercises/*.clj`
+2. Replace `future-facts` with `facts` in the corresponding test/clojure-exercises/*-test.clj
+3. Answers are available under `src/clojure-exercises/answers`
 
-    $ java -jar clojure-exercises-0.1.0-standalone.jar [args]
+To run tests, execute:
 
-## Options
+    $ lein midje
 
-FIXME: listing of options this app accepts.
+Or, from the REPL:
 
-## Examples
+    user=> (tests)
 
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+[Reloaded workflow](http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded) is fully supported.
 
 ## License
-
-Copyright © 2015 FIXME
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
