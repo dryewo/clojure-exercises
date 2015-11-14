@@ -2,11 +2,15 @@
   (:require [clojure.repl :refer [apropos dir doc find-doc pst source]]
             [clojure.tools.namespace.repl :refer [refresh refresh-all]]
             [clojure.test :as test]
-            [clojure-exercises.frequencies :refer :all]
+            [schema.core :as s]
+            [midje.repl :as midje]
+            [instaparse.core :as insta]
             [criterium.core :as crit]))
 
 (defn run-tests []
-  (test/run-all-tests #"clojure-exercises\..*"))
+  (s/with-fn-validation
+    (midje/load-facts 'clojure-exercises.*)
+    #_(test/run-all-tests #"clojure-exercises\..*")))
 
 (defn tests []
   (refresh :after 'user/run-tests))
