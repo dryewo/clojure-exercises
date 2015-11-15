@@ -4,7 +4,6 @@
             [clojure.test :as test]
             [schema.core :as s]
             [midje.repl :as midje]
-            [instaparse.core :as insta]
             [criterium.core :as crit]))
 
 (defn run-tests []

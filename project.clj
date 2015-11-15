@@ -4,8 +4,7 @@
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [prismatic/schema "1.0.3"]
-                 [instaparse "1.4.1"]]
+                 [prismatic/schema "1.0.3"]]
   :main ^:skip-aot clojure-exercises.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
