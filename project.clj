@@ -4,7 +4,8 @@
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [prismatic/schema "1.0.3"]]
+                 [prismatic/schema "1.0.3"]
+                 [midje "1.8.2"]]
   :main ^:skip-aot clojure-exercises.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
@@ -13,5 +14,4 @@
                        :plugins      [[lein-midje "3.2"]]
                        :dependencies [[org.clojure/tools.namespace "0.2.11"]
                                       [org.clojure/java.classpath "0.2.2"]
-                                      [criterium "0.4.3"]
-                                      [midje "1.8.2"]]}})
+                                      [criterium "0.4.3"]]}})
