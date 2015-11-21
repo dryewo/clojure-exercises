@@ -6,14 +6,10 @@
             [midje.repl :as midje]
             [criterium.core :as crit]))
 
-(defn run-tests []
-  (s/with-fn-validation
-    (midje/load-facts 'clojure-exercises.*)
-    #_(test/run-all-tests #"clojure-exercises\..*")))
-
 (defn tests []
-  (refresh :after 'user/run-tests))
-;
+  (s/with-fn-validation
+    (midje/load-facts 'clojure-exercises.*)))
+
 ;(defn run-benchmark []
 ;  (crit/bench (doublets "wheat" "bread")))
 ;

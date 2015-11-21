@@ -9,7 +9,7 @@ Clone the repo.
 ## Usage
 
 1. Select a problem in `src/clojure-exercises/*.clj`
-2. Replace `future-facts` with `facts` in the corresponding test/clojure-exercises/*-test.clj
+2. Replace `future-facts` with `facts`
 3. Answers are available under `src/clojure-exercises/answers`
 
 To run tests, execute:
