@@ -1,4 +1,5 @@
-(ns clojure-exercises.answers.frequencies)
+(ns clojure-exercises.answers.frequencies
+  (:require [midje.sweet :refer :all]))
 
 (defn frequencies-via-reduce [coll]
   (reduce (fn [acc v] (update acc v (fnil inc 0))) {} coll))
@@ -25,3 +26,13 @@
   (if (seq coll)
     (merge-with + {(first coll) 1} (frequencies-via-recursion (next coll)))
     {}))
+
+(def colors ["brown", "red", "green", "yellow", "yellow", "brown", "brown", "black"])
+(def result {"brown" 3, "red" 1, "green" 1, "yellow" 2, "black" 1})
+
+(facts "about frequencies"
+  (frequencies-via-reduce colors) => result
+  (frequencies-via-reduce2 colors) => result
+  (frequencies-via-group-by colors) => result
+  (frequencies-via-loop colors) => result
+  (frequencies-via-recursion colors) => result)
