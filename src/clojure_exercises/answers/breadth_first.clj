@@ -20,7 +20,7 @@
   ;;   2   3
   ;;  / \  |
   ;; 4   5 6
-  (map first (tree-seq-bf rest [1 [2 [4] [5]] [3 [6]]]))
+  (map first (tree-seq-bf next [1 [2 [4] [5]] [3 [6]]]))
   => [1 2 3 4 5 6]
   ;;     :a
   ;;     / \
