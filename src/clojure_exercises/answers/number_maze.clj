@@ -24,35 +24,36 @@
 
 ;; Proper breadth-first search
 
-(defn search-bf [start neighbors goal?]
+(defn search-bf [start neighbours goal?]
   (loop [queue (conj PersistentQueue/EMPTY start)
          previous {}                                        ; map: x -> previous(x)
          visited #{}]
     (when (seq queue)
-      (let [cur (peek queue)]
-        (if (goal? cur)
-          ;; build path from start to cur:
-          (reverse (take-while (complement nil?) (iterate previous cur)))
-          (let [nbrs (remove visited (neighbors cur))]
+      (let [x (peek queue)]
+        ;(println x)
+        (if (goal? x)
+          ;; build path from start to x:
+          (reverse (take-while (complement nil?) (iterate previous x)))
+          (let [nbrs (remove visited (neighbours x))]
             (recur (into (pop queue) nbrs)
                    (into previous (for [n nbrs :when (not (previous n))]
-                                    [n cur]))
-                   (conj visited cur))))))))
+                                    [n x]))
+                   (conj visited x))))))))
 
-(defn neighbors-fn [ops]
+(defn neighbours-fn [ops]
   (fn [n]
     (->> ops
          (map #(% n))
          (remove nil?))))
 
 ;; ~2x slower
-(defn neighbors-fn2 [ops]
+(defn neighbours-fn2 [ops]
   (let [juxt-ops (apply juxt ops)]
     (fn [n]
       (remove nil? (juxt-ops n)))))
 
 ;; ~3x slower
-(defn neighbors-fn3 [ops]
+(defn neighbours-fn3 [ops]
   (fn [n]
     (sequence
       (comp (map #(% n))
@@ -68,13 +69,13 @@
 ;; Version using neighbors-fn2 is the fastest (results for [9 2])
 ;; ~1 ms
 (defn solve-naive [start end]
-  (search-bf start (neighbors-fn OPS) #(= % end)))
+  (search-bf start (neighbours-fn OPS) #(= % end)))
 ;; ~0.87 ms
 (defn solve-naive2 [start end]
-  (search-bf start (neighbors-fn2 OPS) #(= % end)))
+  (search-bf start (neighbours-fn2 OPS) #(= % end)))
 ;; ~0.90 ms
 (defn solve-naive3 [start end]
-  (search-bf start (neighbors-fn3 OPS) #(= % end)))
+  (search-bf start (neighbours-fn3 OPS) #(= % end)))
 
 ;; TESTS
 
@@ -101,17 +102,17 @@
                          (= x 5)))]
     [res @visited]) => [[0 1 2 3 4 5] [0 1 -1 2 -2 3 -3 4 -4 5]])
 
-(facts "about neighbors-fn"
-  ((neighbors-fn OPS) 3) => [6 5]
-  ((neighbors-fn OPS) 4) => [2 8 6])
+(facts "about neighbours-fn"
+  ((neighbours-fn OPS) 3) => [6 5]
+  ((neighbours-fn OPS) 4) => [2 8 6])
 
-(facts "about neighbors-fn2"
-  ((neighbors-fn2 OPS) 3) => [6 5]
-  ((neighbors-fn2 OPS) 4) => [2 8 6])
+(facts "about neighbours-fn2"
+  ((neighbours-fn2 OPS) 3) => [6 5]
+  ((neighbours-fn2 OPS) 4) => [2 8 6])
 
-(facts "about neighbors-fn3"
-  ((neighbors-fn3 OPS) 3) => [6 5]
-  ((neighbors-fn3 OPS) 4) => [2 8 6])
+(facts "about neighbours-fn3"
+  ((neighbours-fn3 OPS) 3) => [6 5]
+  ((neighbours-fn3 OPS) 4) => [2 8 6])
 
 (facts "about solve-naive"
   (solve-naive 1 1) => [1]
