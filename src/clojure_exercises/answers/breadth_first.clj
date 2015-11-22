@@ -12,6 +12,8 @@
 
 (facts "about tree-seq-bf"
   (class (tree-seq-bf (constantly nil) 0)) => LazySeq
+  (take 10 (tree-seq-bf (juxt dec inc) 0))
+  => [0 -1 1 -2 0 0 2 -3 -1 -1]
   (tree-seq-bf (constantly nil) 0) => [0]
   ;;     1
   ;;    / \
