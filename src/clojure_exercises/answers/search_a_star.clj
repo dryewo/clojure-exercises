@@ -21,6 +21,9 @@
 ;; Implementation names:
 ;; g - g(x), known cost from start to x
 ;; f - f(x) = g(x) + h(x)
+;; CREDITS:
+;;  http://clj-me.cgrand.net/2010/09/04/a-in-clojure/
+;;  http://clojure.roboloco.net/?p=660
 ;; TODO Implement optimization for monotonic h(x)
 (defn search-A* [start neighbours h goal?]
   (let [nbrs (normalized-neighbours neighbours)
