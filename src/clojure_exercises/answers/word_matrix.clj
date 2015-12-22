@@ -7,6 +7,9 @@
   (:import (clojure.lang PersistentQueue)
            (java.util HashMap)))
 
+;; Inspired by:
+;; http://img.artlebedev.ru/kovodstvo/idioteka/i/3195C27E-DC06-40E4-9753-C0F7E58377BE.jpg
+
 ;; Approaches to solution:
 ;; 1. Crawl the matrix, try to check in the dictionary (need to index the dictionary)
 ;; 2. Enumerate words, try to match (need to index the matrix)
