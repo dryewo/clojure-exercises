@@ -117,32 +117,29 @@
     (->NaiveDictIndex3 hmap)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Trie-based dictionary index (not finished)
+;; Trie-based dictionary index
 
-;(defrecord TrieDictIndex [entries prefixes]
-;  DictIndex
-;  (lookup [_ s]
-;    (cond
-;      (contains? entries s) :entry
-;      (nil? s) false
-;      (not (false? (get-in prefixes (seq s) false))) :prefix)))
-;
-;(defn make-trie-dict-index [words]
-;  (let [entries  (into #{} words)
-;        prefixes (reduce (fn [acc w]
-;                           (update-in acc (seq w) identity))
-;                         {} words)]
-;    (->TrieDictIndex entries prefixes)))
-;
-;(facts "about make-trie-dict-index"
-;  (make-trie-dict-index ["foo"]) => {:entries  #{"foo"}
-;                                     :prefixes {\f {\o {\o nil}}}}
-;  (make-trie-dict-index ["foo" "bar"]) => {:entries  #{"foo" "bar"}
-;                                           :prefixes {\f {\o {\o nil}}
-;                                                      \b {\a {\r nil}}}}
-;  (make-trie-dict-index ["bad" "bare"]) => {:entries  #{"bad" "bare"}
-;                                            :prefixes {\b {\a {\d nil
-;                                                               \r {\e nil}}}}})
+(defrecord TrieDictIndex [trie]
+           DictIndex
+           (lookup [_ s]
+                   (when-let [node (get-in trie (interpose :children s))]
+                             (get node :type false))))
+
+(let [trie (->TrieDictIndex {\f {:children {\o {:type     true
+                                                :children nil}}}})]
+     (facts "about TrieDictIndex"
+            (lookup trie "fo") => true
+            (lookup trie "f") => false
+            (lookup trie "bo") => nil))
+
+(defn insert [trie s]
+      (update-in trie (interpose :children s) assoc :type true))
+
+(facts "about insert"
+       (insert {} "fo") => {\f {:children {\o {:type true}}}})
+
+(defn make-trie-dict-index [words]
+      (->TrieDictIndex (reduce insert {} words)))
 
 (comment
 
@@ -166,6 +163,9 @@
     (time (doseq [w lookup-test-data]
             (lookup index w))))
   (let [index (time (make-naive-dict-index3 dict))]
+       (time (doseq [w lookup-test-data]
+                    (lookup index w))))
+  (let [index (time (make-trie-dict-index dict))]
     (time (doseq [w lookup-test-data]
             (lookup index w))))
 
