@@ -39,6 +39,13 @@
     '* true
     '/ (zero? (mod v1 v2))))
 
+(defn legal?' [op v1 v2]
+  (condp = op
+    '+ (<= v1 v2)
+    '- (> v1 v2)
+    '* (and (> v1 1) (> v2 v1))
+    '/ (and (> 1 v2) (zero? (mod v1 v2)))))
+
 (defn unmerges [[x1 x2 :as xxs]]
   (if (= 2 (count xxs))
     [[[x1] [x2]] [[x2] [x1]]]
@@ -135,7 +142,10 @@
   (time (count (perms (range 10))))
   (count (mapcat perms (subseqs (range 6))))
   (unmerges [1 2 3 4])
-  ;; ~7s
+  ;; ~7 s
   (time (countdown1 831 [1 3 7 10 25 50]))
+  ;; ~900 ms
+  (time (with-redefs [legal? legal?']
+          (countdown1 831 [1 3 7 10 25 50])))
 
   )
