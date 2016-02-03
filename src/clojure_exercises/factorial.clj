@@ -1,11 +1,15 @@
 (ns clojure-exercises.factorial
   (:require [midje.sweet :refer :all]))
 
+;; Factorial:
+;; n! = n * (n-1) * ... * 1
+
 (defn factorial-naive
   "Using direct recursion"
   [n]
   )
 
+;; Hint: use (recur ...)
 (defn factorial-tailrec
   "Using helper function for tail recursion"
   [n]
@@ -21,7 +25,7 @@
   [n]
   )
 
-(future-facts "about factorial"
+(future-facts "about factorial-naive"
               (factorial-naive 0) => 1
               (factorial-naive 3) => 6
               (factorial-naive 5) => 120

@@ -1,6 +1,10 @@
 (ns clojure-exercises.fibonacci
   (:require [midje.sweet :refer :all]))
 
+;; Fibonacci numbers:
+;; F(n) = F(n-1) + F(n-2)
+;; 0 1 1 2 3 5 8 13 21 ...
+
 (defn fibonacci-naive
   "Using direct recursion"
   [n]
