@@ -1,6 +1,7 @@
 (ns clojure-exercises.answers.einstein-riddle
   (:require [midje.sweet :refer :all]
-            [clojure.math.combinatorics :as c]))
+            [clojure.math.combinatorics :as c])
+  (:import (java.util List)))
 
 (def nationalities [:norwegian :brit :swede :dane :german])
 (def colors [:red :green :white :yellow :blue])
@@ -8,7 +9,7 @@
 (def cigars [:pall-mall :dunhill :blends :blue-master :prince])
 (def pets [:dogs :birds :cats :horses :fish])
 
-(defn N [coll val]
+(defn N [^List coll val]
   (.indexOf coll val))
 
 (defn next-to [n1 n2]
