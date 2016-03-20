@@ -8,7 +8,9 @@
                  [prismatic/schema "1.0.3"]
                  [midje "1.8.2"]
                  [instaparse "1.4.1"]
-                 [org.clojure/data.priority-map "0.0.7"]]
+                 [org.clojure/data.priority-map "0.0.7"]
+                 [automat "0.1.3"]
+                 [potemkin "0.4.3"]]
   :main ^:skip-aot clojure-exercises.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}

@@ -1,5 +1,7 @@
 (ns clojure-exercises.answers.roman
-  (:require [midje.sweet :refer :all]))
+  (:require [midje.sweet :refer :all]
+            [automat.core :as a]
+            [automat.viz :refer (view)]))
 
 ;; Naïve implementation
 
@@ -52,6 +54,42 @@
          (apply str))))
 
 (def make-roman (partial make-roman-generic ROMAN_DIGITS))
+
+;(defn up-to-n [n c v]
+;  (a/interpose-$ v (repeat n (a/? c))))
+;
+;(defn reducers [v]
+;  (fn [state _] (+ state v)))
+;
+;(def roman-automat
+;  (a/compile [(a/or (up-to-n 1 \V 5) (up-to-n 3 \I 1))]
+;             {:reducers reducers}))
+;
+;(defn parse-roman [r]
+;  (let [prepared-input (map int r)
+;        res            (reduce (partial a/advance roman-automat) 0 prepared-input)]
+;    (or (:value res) res)))
+;
+;(facts "about parse-roman"
+;  (tabular
+;    (fact (parse-roman ?r) => ?n)
+;    ?r ?n
+;    "" 0, "II" 2, "V" 5, "VIII" 8)
+;  (tabular
+;    (fact (parse-roman ?r) => (throws IllegalArgumentException))
+;    ?r
+;    " " "IIII" "VV" "VIV"))
+;
+;(comment
+;
+;  (a/find roman-automat nil (map int "II"))
+;  ((eval (list 'add 1)) 10 nil)
+;  ((reducers (list 'add 5)) 4 nil)
+;  (view roman-automat)
+;  (view (up-to-n 3 9 5))
+;  (reduce (partial a/advance roman-automat) :aaa [73])
+;
+;  )
 
 ;; TESTS
 
