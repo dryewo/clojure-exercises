@@ -2,8 +2,7 @@
   (:require [midje.sweet :refer :all]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure-exercises.answers.utils :refer [spy]]
-            [criterium.core :as crit])
+            [clojure-exercises.answers.utils :refer [spy]])
   (:import (clojure.lang PersistentQueue)
            (java.util HashMap)))
 

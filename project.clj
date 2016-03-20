@@ -13,6 +13,7 @@
                  [potemkin "0.4.3"]]
   :main ^:skip-aot clojure-exercises.core
   :target-path "target/%s"
+  :uberjar-name "clojure-exercises.jar"
   :profiles {:uberjar {:aot :all}
              :dev     {:source-paths ["dev"]
                        :repl-options {:init-ns user}

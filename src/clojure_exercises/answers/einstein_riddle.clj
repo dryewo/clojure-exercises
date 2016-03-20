@@ -1,6 +1,5 @@
 (ns clojure-exercises.answers.einstein-riddle
-  (:require [midje.sweet :refer :all]
-            [clojure.math.combinatorics :as c])
+  (:require [clojure.math.combinatorics :as c])
   (:import (java.util List)))
 
 (def nationalities [:norwegian :brit :swede :dane :german])
@@ -43,6 +42,10 @@
         :when (next-to (N cig :dunhill) (N pet :horses))
         ]
     [nat pet col cig bev]))
+
+(defn benchmark []
+  (dotimes [_ 10]
+    (time (doall (solve)))))
 
 (comment
   (time (doall (solve)))

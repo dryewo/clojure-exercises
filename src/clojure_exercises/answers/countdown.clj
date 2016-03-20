@@ -1,8 +1,7 @@
 (ns clojure-exercises.answers.countdown
   (:require [midje.sweet :refer :all]
             [clojure.string :as str]
-            [clojure-exercises.answers.utils :refer [spy]]
-            [criterium.core :as crit]))
+            [clojure-exercises.answers.utils :refer [spy]]))
 
 ;; http://dai.fmph.uniba.sk/courses/FPRO/bird_pearls.pdf
 ;; http://www.cs.nott.ac.uk/~pszgmh/countdown.pdf
