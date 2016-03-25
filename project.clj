@@ -7,6 +7,7 @@
                  [org.clojure/math.combinatorics "0.1.1"]
                  [prismatic/schema "1.0.5"]
                  [midje "1.8.3"]
+                 [org.clojure/core.match "0.3.0-alpha4"]
                  [instaparse "1.4.1"]
                  [org.clojure/data.priority-map "0.0.7"]
                  [automat "0.1.3"]
