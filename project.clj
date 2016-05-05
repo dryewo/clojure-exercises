@@ -11,7 +11,8 @@
                  [instaparse "1.4.1"]
                  [org.clojure/data.priority-map "0.0.7"]
                  [automat "0.1.3"]
-                 [potemkin "0.4.3"]]
+                 [potemkin "0.4.3"]
+                 [loco "0.3.1"]]
   :main ^:skip-aot clojure-exercises.core
   :target-path "target/%s"
   :uberjar-name "clojure-exercises.jar"
