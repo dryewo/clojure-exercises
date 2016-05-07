@@ -1,5 +1,7 @@
 (ns clojure-exercises.answers.8queens
-  (:require [midje.sweet :refer :all]))
+  (:require [midje.sweet :refer :all]
+            [loco.core :refer [solutions solution]]
+            [loco.constraints :refer :all]))
 
 ;; Adapted after https://github.com/jeffbrown/clojure-n-queens
 
@@ -27,5 +29,30 @@
   (count (solve-for-board-size 8)) => 92)
 
 (comment
-  (time (count (solve-for-board-size 10)))
+  (solve-for-board-size 4)
+  (time (count (solve-for-board-size 11)))
   )
+
+;; Solution using Loco
+
+(defn prettify-solution [sol]
+  (vals (into (sorted-map) sol)))
+
+(defn solve-for-board-size2 [n]
+  (let [indexes (range n)
+        model   (concat
+                  (for [i indexes] ($in [:x i] 1 n))
+                  [($distinct (for [i indexes] [:x i]))
+                   ($distinct (for [i indexes] ($- [:x i] i)))
+                   ($distinct (for [i indexes] ($+ [:x i] i)))])]
+    (map prettify-solution (solutions model))))
+
+(facts ""
+  (solve-for-board-size 8) => (just (solve-for-board-size2 8) :in-any-order))
+
+(comment
+  (solve-for-board-size2 4)
+  (time (count (solve-for-board-size2 11)))
+  (solutions [($in :x 0 1)
+              ($in :y 0 1)
+              ($distinct [($+ :x 1) ($+ :y 1)])]))
