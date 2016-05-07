@@ -4,9 +4,7 @@
             [clojure.test :as test]
             [schema.core :as s]
             [midje.repl :as midje]
-            [criterium.core :as crit]
-            [automat.core :as a]
-            [automat.viz :refer (view)]))
+            [criterium.core :as crit]))
 
 (defn tests []
   (s/with-fn-validation
