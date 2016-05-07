@@ -5,18 +5,21 @@
 
 ;; https://en.wikipedia.org/wiki/Change-making_problem
 
+(defn make-change-solve [denominations n]
+  (let [denoms (set denominations)
+        vars   (for [d denoms] [:x d])]
+    (solution (concat
+                (for [v vars] ($in v 0 n))
+                [($= n ($scalar vars denoms))])
+              :minimize (apply $+ vars))))
+
 (defn make-change [denominations n]
   {:pre [(>= n 0)]}
   (if (zero? n)
     {}
     (if (empty? denominations)
       nil
-      (let [denoms (set denominations)
-            vars   (for [d denoms] [:x d])
-            sol    (solution (concat
-                               (for [v vars] ($in v 0 n))
-                               [($= n ($scalar vars denoms))])
-                             :minimize (apply $+ vars))]
+      (let [sol (make-change-solve denominations n)]
         (#(when (seq %) %)
           (into (sorted-map) (for [[[_ d] c] sol
                                    :when (pos? c)]
